@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react' ;
-import Table from ".components/Table";
-
+import Table from "./components/Table";
+import Form from "./components/Form";
 
 class App extends Component {
   state = {
@@ -39,10 +39,35 @@ class App extends Component {
       ]
   };
 
+  removeCar = index => {
+    const { carList } = this.state
+    this.setState (
+      {
+        carList: carList.filter((car, i) => {return i !==index} )
+      });
+  }
+
+  detailCar = index => {
+    const { carList } = this.state
+    this.setState (
+      {
+        carList
+      });
+  }
+
+  handleSubmit = car => {
+    this.setState( { carList: [...this.state.carList, car] } );
+  }
+
   render() {
     return (
       <Fragment>
-        <Table characterData={this.carList}></Table>
+        <h1>Details</h1>
+        <hr />
+        <Table carListProp={this.state.carList} removeCar={this.removeCar} />
+        <h1>Create</h1>
+        <hr />
+        <Form handleSubmit={this.handleSubmit} />
       </Fragment>
     );
   }

@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+
+export default class Details extends Component {
+        
+     
+        render() {
+            
+            const TableHeader = () => {
+                return (
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Price</th>
+                            <th>Options</th>                           
+                        </tr>
+                    </thead>
+                )
+            }
+            const TableBody = props => {
+                const rows = props.carList.map((row) => {
+                    return (                    
+                            <tr key={"carId" + row.Id}>
+                                <td>{row.brand}</td>
+                                <td>{row.model}</td>
+                                <td>{row.year}</td>
+                                <td>
+                                    <button onClick={() => props.removeCar(row.Id) }>Delete</button>
+                                </td>                            
+                            </tr>                    
+                    )
+                });
+                return <tbody>{rows}</tbody>
+            }
+            return (
+                <table>
+                    <TableHeader />
+                    <TableBody  carList={this.props.carList} removeCar={this.props.removeCar} />
+                </table>
+            );
+        }
+    
+}

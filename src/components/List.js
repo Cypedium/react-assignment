@@ -34,7 +34,7 @@ export default class List extends Component {
             return (
                 <Fragment>
                     <TableHeader />
-                    <TableBody  carList={this.props.carList} detailCar={this.props.detailCar} />
+                    <TableBody  carList={this.props.carList} detailCar={this.props.detailCar}/>
                 </Fragment>
             );
         }

@@ -42,7 +42,7 @@ class App extends Component {
               "year": "2019",
               "price": "1 995 000 SEK"
           }
-      ]
+      ], createNewCar: false
   };
 
   
@@ -63,7 +63,20 @@ detailCar = Id => {
     });
 }
 
-  handleSubmit = car => {
+handleEnableCreateCar () {
+  this.setState({createNewCar: true});
+  return(
+    <Create
+    handleSubmit={this.handleSubmit} 
+    handleDisableCreateCar={this.handleDisableCreateCar}
+    />
+  );
+}
+handleDisableCreateCar(){
+  this.setState({createNewCar: false})
+}
+
+handleSubmit = car => {
     this.setState( { carList: [...this.state.carList, car] } );
   }
 
@@ -71,20 +84,24 @@ detailCar = Id => {
     return (
       <Fragment>
         <h1>List of Cars</h1>
-        <List carList={this.state.carList} />
+        <button onClick={this.handleEnableCreateCar()}> Create </button>                 
+        <List
+          carList={this.state.carList} 
+          detailCar={this.detailCar}
+          />
         <table>
           <tr>
             <td></td>
             <td>
             <h2>Details</h2>
               <hr />
-              <Details carList={this.state.carList} removeCar={this.removeCar} detailCar={this.detailCar} />
+              <Details 
+                carList={this.state.carList}
+                removeCar={this.removeCar}
+              />
             </td>
             <td></td>
             <td>
-              <h2>Create New Car</h2>
-              <hr />
-              <Create handleSubmit={this.handleSubmit} />
             </td>
             <td></td> 
           </tr>

@@ -65,6 +65,10 @@ detailCar = Id => {
   this.setState({details: false});
 }
 
+filterBrand (brand) {
+  /* tomorrow */
+}
+
 
 handleSubmit = car => {
     this.setState({ carList: [...this.state.carList, car] } );

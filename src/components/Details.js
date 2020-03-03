@@ -19,15 +19,16 @@ export default class Details extends Component {
                 )
             }
             const TableBody = props => {
-                const rows = props.carList.map((row) => {
+                const rows = props.carListView.map((row) => {
                     return (                    
                             <tr key={"carId" + row.Id}>
                                 <td>{row.brand}</td>
                                 <td>{row.model}</td>
                                 <td>{row.year}</td>
+                                <td>{row.price}</td>
                                 <td>
                                     <button onClick={() => props.removeCar(row.Id) }>Delete</button>
-                                </td>                            
+                                </td>                         
                             </tr>                    
                     )
                 });
@@ -36,7 +37,7 @@ export default class Details extends Component {
             return (
                 <table>
                     <TableHeader />
-                    <TableBody  carList={this.props.carList} removeCar={this.props.removeCar} />
+                    <TableBody  carListView={this.props.carListView} removeCar={this.props.removeCar} />
                 </table>
             );
         }

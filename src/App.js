@@ -42,7 +42,7 @@ class App extends Component {
               "year": "2019",
               "price": "1 995 000 SEK"
           }
-      ], createNewCar: false
+      ], createButtonClicked: false, details: true
   };
 
   
@@ -56,56 +56,67 @@ class App extends Component {
   }
 
 detailCar = Id => {
+  
   const { carList } = this.state;
   this.setState (
     {
-      carList: carList.filter((aCar) => {return aCar.Id ===Id} )
+      carListView: carList.filter((aCar) => {return aCar.Id ===Id} )
     });
+  this.setState({details: false});
 }
 
-handleEnableCreateCar () {
-  this.setState({createNewCar: true});
-  return(
-    <Create
-    handleSubmit={this.handleSubmit} 
-    handleDisableCreateCar={this.handleDisableCreateCar}
-    />
-  );
-}
-handleDisableCreateCar(){
-  this.setState({createNewCar: false})
-}
 
 handleSubmit = car => {
-    this.setState( { carList: [...this.state.carList, car] } );
+    this.setState({ carList: [...this.state.carList, car] } );
+    this.setState({createButtonClicked: false})
   }
 
   render() {
+    const {createButtonClicked, details} = this.state;
     return (
       <Fragment>
-        <h1>List of Cars</h1>
-        <button onClick={this.handleEnableCreateCar()}> Create </button>                 
-        <List
-          carList={this.state.carList} 
-          detailCar={this.detailCar}
-          />
-        <table>
+        <table> {/* Head */}
           <tr>
             <td></td>
             <td>
-            <h2>Details</h2>
-              <hr />
-              <Details 
-                carList={this.state.carList}
-                removeCar={this.removeCar}
-              />
+              <h1>Handle Cars</h1>
+              <button onClick={() => this.setState({createButtonClicked: true})}>Create new Car</button>            
             </td>
             <td></td>
-            <td>
-            </td>
-            <td></td> 
           </tr>
-        </table>       
+          <tr>
+            <td></td>
+            <td>
+              { details ? (
+                <Fragment>
+                  <h2>List of Cars</h2>
+                  <List carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} />
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <h2>Details</h2>
+                    <span>
+                      <button onClick={() => this.setState({details: true})}> Back to List </button>
+                    </span>
+                  <Details 
+                    carListView={this.state.carListView}
+                    removeCar={this.removeCar}/>
+                </Fragment>
+              )
+              }
+            <br />
+            </td>
+            <td>
+              { createButtonClicked ? (
+                <Create handleSubmit={this.handleSubmit} />
+              ) : (
+                null
+              )}
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
       </Fragment>
     );
   }

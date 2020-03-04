@@ -43,7 +43,7 @@ class App extends Component {
               "year": "2019",
               "price": "1 995 000 SEK"
           }
-      ], createButtonClicked: false, details: true
+      ], createButtonClicked: false, details: true, showEditCar: false
   };
 
   
@@ -70,9 +70,14 @@ editCar = car => {
 const { carList } =this.state;
 this.setState(
     {
-      carList: carList.push(this.car)
+      carList: carList.append(car)
     }
-  )
+  );
+  this.setState({showEditCar: false})
+}
+
+showEditCar () {
+  this.setState ({showEditCar: true})
 }
 
 sortList (sortRow) {
@@ -96,7 +101,7 @@ handleSubmit = car => {
   }
 
   render() {
-    const {createButtonClicked, details} = this.state;
+    const {createButtonClicked, details, showEditCar} = this.state;
     return (
       <Fragment>
         <table> {/* Head */}
@@ -133,6 +138,8 @@ handleSubmit = car => {
             <td>
               { createButtonClicked ? (
                 <Create handleSubmit={this.handleSubmit} />
+              ) : showEditCar ? (
+                <Edit editCar={this.editCar} />
               ) : (
                 null
               )}

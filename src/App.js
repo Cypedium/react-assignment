@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react' ;
 import Details from "./components/Details";
 import Create from "./components/Create";
 import List from "./components/List";
+import Edit from "./components/Edit";
 
 class App extends Component {
   state = {
@@ -65,7 +66,26 @@ detailCar = Id => {
   this.setState({details: false});
 }
 
-filterBrand (brand) {
+editCar = car => {
+const { carList } =this.state;
+this.setState(
+    {
+      carList: carList.push(this.car)
+    }
+  )
+}
+
+sortList (sortRow) {
+  const { carList} = this.state;
+  this.setState (
+    {
+      carListSort: carList.sort(function(a, b){
+        if (a.sortRow < b.sortRow) {return -1;}
+        if (a.sortRow > b.sortRow) {return 1; }
+        return 0;
+      })
+    });
+    /* users.sort((a, b) => a.sortRow.localeCompare(b.sortRow)) */
   /* tomorrow */
 }
 

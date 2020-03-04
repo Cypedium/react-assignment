@@ -28,7 +28,11 @@ export default class Details extends Component {
                                 <td>{row.price}</td>
                                 <td>
                                     <button onClick={() => props.removeCar(row.Id) }>Delete</button>
-                                </td>                         
+                                </td>
+                                {" "}
+                                <td>
+                                    <button onClick={() => props.editCar(row) }>Delete</button>
+                                </td>                                                  
                             </tr>                    
                     )
                 });
@@ -37,7 +41,7 @@ export default class Details extends Component {
             return (
                 <table>
                     <TableHeader />
-                    <TableBody  carListView={this.props.carListView} removeCar={this.props.removeCar} />
+                    <TableBody  carListView={this.props.carListView} removeCar={this.props.removeCar} editCar={this.props.editCar} />
                 </table>
             );
         }

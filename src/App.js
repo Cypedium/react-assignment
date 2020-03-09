@@ -56,49 +56,59 @@ class App extends Component {
       });
   }
 
-detailCar = Id => {
-  
-  const { carList } = this.state;
-  this.setState (
-    {
-      carListView: carList.filter((aCar) => {return aCar.Id ===Id} )
-    });
-  this.setState({details: false});
-}
-
-editCar = car => {
-const { carList } =this.state;
-this.setState(
-    {
-      carList: carList.append(car)
-    }
-  );
-  this.setState({showEditCar: false})
-}
-
-showEditCar () {
-  this.setState ({showEditCar: true})
-}
-
-sortList (sortRow) {
-  const { carList} = this.state;
-  this.setState (
-    {
-      carListSort: carList.sort(function(a, b){
-        if (a.sortRow < b.sortRow) {return -1;}
-        if (a.sortRow > b.sortRow) {return 1; }
-        return 0;
-      })
-    });
-    /* users.sort((a, b) => a.sortRow.localeCompare(b.sortRow)) */
-  /* tomorrow */
-}
-
-
-handleSubmit = car => {
-    this.setState({ carList: [...this.state.carList, car] } );
-    this.setState({createButtonClicked: false})
+  detailCar = Id => {
+    
+    const { carList } = this.state;
+    this.setState (
+      {
+        carListView: carList.filter((aCar) => {return aCar.Id ===Id} )
+      });
+    this.setState({details: false});
   }
+
+  editCar = car => {
+  const { carList } =this.state;
+  this.setState(
+      {
+        carList: carList.append(car)
+      }
+    );
+    this.setState({showEditCar: false})
+  }
+
+  showEditCar () {
+    this.setState ({showEditCar: true})
+  }
+
+  sortList (sortRow) {
+    const { carList} = this.state;
+  
+      switch (sortRow) {
+        case "brand":
+          this.setState ({carListSort: carList.sort(sortRow)});
+        break;
+
+        case "model":
+          this.setState ({carListSort: carList.sort(sortRow)});
+        break;
+
+        case "year":         
+        this.setState ({carListSort: carList.sort(sortRow)});
+        break;
+
+        case "price":         
+        this.setState ({carListSort: carList.sort(sortRow)});
+        break;
+                  
+        default:
+        break;
+      }
+    }
+  
+  handleSubmit = car => {
+      this.setState({ carList: [...this.state.carList, car] } );
+      this.setState({createButtonClicked: false})
+    }
 
   render() {
     const {createButtonClicked, details, showEditCar} = this.state;
@@ -119,7 +129,7 @@ handleSubmit = car => {
               { details ? (
                 <Fragment>
                   <h2>List of Cars</h2>
-                  <List carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} />
+                  <List carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortList={this.sortList} />
                 </Fragment>
               ) : (
                 <Fragment>

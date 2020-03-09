@@ -6,20 +6,21 @@ export default class List extends Component {
         render() {  
             const TableHeader = props => {
                 return (
-                    <thead>
                         <tr>
                             <th>
-                                <button onClick={() => props.sortList(props.carList.row.brand)}>Brand</button>
+                                <button onClick={() => props.sortList("brand")}>Brand</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortList(props.carList.row.model)}>Model</button>
+                                <button onClick={() => props.sortList("model")}>Model</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortList(props.carList.row.year)}>Year</button>
+                                <button onClick={() => props.sortList("year")}>Year</button>
+                            </th>
+                            <th>
+                                <button onClick={() => props.sortList("price")}>Price</button>
                             </th> 
                             <th>Options</th>                     
                         </tr>
-                    </thead>
                 );  
             }
 
@@ -31,6 +32,7 @@ export default class List extends Component {
                                 <td>{row.brand}</td>
                                 <td>{row.model}</td>
                                 <td>{row.year}</td>
+                                <td>{row.price}</td>
                                 <td>
                                     <button onClick={() => props.detailCar(row.Id)}>Detail</button>
                                     {" "}

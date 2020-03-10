@@ -1,23 +1,22 @@
 import React, { Component, Fragment } from 'react';
 
-export default class List extends Component {
-        
+export default class List extends Component {  
      
         render() {  
             const TableHeader = props => {
                 return (
                         <tr>
                             <th>
-                                <button onClick={() => props.sortList("brand")}>Brand</button>
+                                <button onClick={() => props.sortBy('brand')}>Brand</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortList("model")}>Model</button>
+                                <button onClick={() => props.sortBy('model')}>Model</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortList("year")}>Year</button>
+                                <button onClick={() => props.sortBy('year')}>Year</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortList("price")}>Price</button>
+                                <button onClick={() => props.sortBy('price')}>Price</button>
                             </th> 
                             <th>Options</th>                     
                         </tr>
@@ -45,7 +44,7 @@ export default class List extends Component {
             }
             return (
                 <Fragment>
-                    <TableHeader carList={this.props.carList} sortList={this.props.sortList} />
+                    <TableHeader sortBy={this.props.sortBy} />
                     <TableBody  carList={this.props.carList} detailCar={this.props.detailCar} removeCar={this.props.removeCar} />
                 </Fragment>
             );

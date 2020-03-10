@@ -5,6 +5,7 @@ import List from "./components/List";
 import Edit from "./components/Edit";
 
 class App extends Component {
+  
   state = {
       carList: 
       [
@@ -34,19 +35,19 @@ class App extends Component {
               "brand": "Nissan",
               "model": "Leaf",
               "year": "2012",
-              "price": "185 000 SEK"
+              "price": "185000 SEK"
           },
           {
               "Id": "5",
               "brand": "Tesla",
               "model": "Model S",
               "year": "2019",
-              "price": "1 995 000 SEK"
+              "price": "1995000 SEK"
           }
-      ], createButtonClicked: false, details: true, showEditCar: false
+      ], createButtonClicked: false, details: true, showEditCar: false, toggleSort: true
+      
   };
 
-  
 
   removeCar = Id => {
     const { carList } = this.state;
@@ -80,30 +81,23 @@ class App extends Component {
     this.setState ({showEditCar: true})
   }
 
-  sortList (sortRow) {
-    const { carList} = this.state;
-  
-      switch (sortRow) {
-        case "brand":
-          this.setState ({carListSort: carList.sort(sortRow)});
-        break;
+  sortBy = (column) => { /* use arrowfunction to binds this */
+    const { carList, toggleSort } = this.state;
+          console.log(column);
+          this.setState ({           
+            carList: carList.sort( (a, b) => (
+              toggleSort === true/*  || column !== oldColumn tomorrow
+ */              ? parseFloat(a[column]) - parseFloat(b[column])
+              : parseFloat(b[column]) - parseFloat(a[column])
+            )),            
+            toggleSort: 
+            toggleSort === true
+              ? false
+              : true
+    })
+  }
 
-        case "model":
-          this.setState ({carListSort: carList.sort(sortRow)});
-        break;
 
-        case "year":         
-        this.setState ({carListSort: carList.sort(sortRow)});
-        break;
-
-        case "price":         
-        this.setState ({carListSort: carList.sort(sortRow)});
-        break;
-                  
-        default:
-        break;
-      }
-    }
   
   handleSubmit = car => {
       this.setState({ carList: [...this.state.carList, car] } );
@@ -129,7 +123,8 @@ class App extends Component {
               { details ? (
                 <Fragment>
                   <h2>List of Cars</h2>
-                  <List carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortList={this.sortList} />
+                  <List 
+                  carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortBy={this.sortBy} />
                 </Fragment>
               ) : (
                 <Fragment>

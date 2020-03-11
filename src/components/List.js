@@ -7,16 +7,16 @@ export default class List extends Component {
                 return (
                         <tr>
                             <th>
-                                <button onClick={() => props.sortBy('brand')}>Brand</button>
+                                <button onClick={() => props.sortByString("brand")}>Brand</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortBy('model')}>Model</button>
+                                <button onClick={() => props.sortByInt("model")}>Model</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortBy('year')}>Year</button>
+                                <button onClick={() => props.sortByInt("year")}>Year</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortBy('price')}>Price</button>
+                                <button onClick={() => props.sortByInt("price")}>Price</button>
                             </th> 
                             <th>Options</th>                     
                         </tr>
@@ -44,7 +44,7 @@ export default class List extends Component {
             }
             return (
                 <Fragment>
-                    <TableHeader sortBy={this.props.sortBy} />
+                    <TableHeader sortByInt={this.props.sortByInt} sortByString={this.props.sortByString} />
                     <TableBody  carList={this.props.carList} detailCar={this.props.detailCar} removeCar={this.props.removeCar} />
                 </Fragment>
             );

@@ -33,18 +33,18 @@ class App extends Component {
           {
               "Id": "4",
               "brand": "Nissan",
-              "model": "Leaf",
+              "model": "300",
               "year": "2012",
               "price": "185000 SEK"
           },
           {
               "Id": "5",
               "brand": "Tesla",
-              "model": "Model S",
+              "model": "1000",
               "year": "2019",
               "price": "1995000 SEK"
           }
-      ], createButtonClicked: false, details: true, showEditCar: false, toggleSort: true
+      ], createButtonClicked: false, details: true, showEditCar: false, toggleSort: true, oldColumn: ""
       
   };
 
@@ -81,19 +81,44 @@ class App extends Component {
     this.setState ({showEditCar: true})
   }
 
-  sortBy = (column) => { /* use arrowfunction to binds this */
-    const { carList, toggleSort } = this.state;
-          console.log(column);
+  sortByString = (column) => { /* use arrowfunction to binds this */
+    const { carList, toggleSort, oldColumn } = this.state; 
           this.setState ({           
             carList: carList.sort( (a, b) => (
-              toggleSort === true/*  || column !== oldColumn tomorrow
- */              ? parseFloat(a[column]) - parseFloat(b[column])
-              : parseFloat(b[column]) - parseFloat(a[column])
+               toggleSort === true             
+              ? ((a[column].toLowerCase() < b[column].toLowerCase()) || column !== oldColumn)
+                  ? -1
+                : ((a[column].toLowerCase() > b[column].toLowerCase()) || column !== oldColumn)
+                  ? 1
+                : 0
+              :
+                ((a[column].toLowerCase() > b[column].toLowerCase()) || column !== oldColumn)
+                  ? -1
+                : ((a[column].toLowerCase() < b[column].toLowerCase()) || column !== oldColumn)
+                  ? 1
+                : 0
             )),            
             toggleSort: 
             toggleSort === true
               ? false
-              : true
+              : true,
+            oldColumn: column           
+    })
+  }
+
+  sortByInt = (column) => { /* use arrowfunction to binds this */
+    const { carList, toggleSort, oldColumn } = this.state; 
+          this.setState ({           
+            carList: carList.sort( (a, b) => (
+              toggleSort === true || column !== oldColumn
+                ? parseFloat(a[column]) - parseFloat(b[column])
+                : parseFloat(b[column]) - parseFloat(a[column])
+            )),            
+            toggleSort: 
+            toggleSort === true
+              ? false
+              : true,
+            oldColumn: column           
     })
   }
 
@@ -124,7 +149,7 @@ class App extends Component {
                 <Fragment>
                   <h2>List of Cars</h2>
                   <List 
-                  carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortBy={this.sortBy} />
+                  carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortByInt={this.sortByInt} sortByString={this.sortByString} />
                 </Fragment>
               ) : (
                 <Fragment>

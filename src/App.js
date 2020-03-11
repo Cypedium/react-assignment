@@ -44,7 +44,7 @@ class App extends Component {
               "year": "2019",
               "price": "1995000 SEK"
           }
-      ], createButtonClicked: false, details: true, showEditCar: false, toggleSort: true, oldColumn: ""
+      ], createButtonClicked: false, editButtonClicked: false, details: true, showEditCar: false, toggleSort: true, oldColumn: ""
       
   };
 
@@ -67,7 +67,7 @@ class App extends Component {
     this.setState({details: false});
   }
 
-  editCar = car => {
+  /* editCar = car => {
   const { carList } =this.state;
   this.setState(
       {
@@ -75,10 +75,22 @@ class App extends Component {
       }
     );
     this.setState({showEditCar: false})
+  } */
+
+  editCar = car => {
+    this.setState({editButtonClicked: true});
+    return (<Edit handleSubmitEdit={() => this.handleSubmitEdit(car)} />)
   }
 
-  showEditCar () {
-    this.setState ({showEditCar: true})
+
+  handleSubmitCreate = car => {
+    this.setState({ carList: [...this.state.carList, car] } );
+    this.setState({createButtonClicked: false})
+  }
+
+  handleSubmitEdit = car => {
+    this.setState({ carList: [...this.state.carList, car] } );
+    this.setState({editButtonClicked: false})
   }
 
   sortByString = (column) => { /* use arrowfunction to binds this */
@@ -122,15 +134,8 @@ class App extends Component {
     })
   }
 
-
-  
-  handleSubmit = car => {
-      this.setState({ carList: [...this.state.carList, car] } );
-      this.setState({createButtonClicked: false})
-    }
-
   render() {
-    const {createButtonClicked, details, showEditCar} = this.state;
+    const {createButtonClicked, details, editButtonClicked} = this.state;
     return (
       <Fragment>
         <table> {/* Head */}
@@ -151,7 +156,7 @@ class App extends Component {
                   <List 
                   carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortByInt={this.sortByInt} sortByString={this.sortByString} />
                 </Fragment>
-              ) : (
+                ) : (
                 <Fragment>
                   <h2>Details</h2>
                     <span>
@@ -159,20 +164,24 @@ class App extends Component {
                     </span>
                   <Details 
                     carListView={this.state.carListView}
-                    removeCar={this.removeCar}/>
+                    removeCar={this.removeCar}
+                    editCar={this.editCar} />
                 </Fragment>
-              )
+                )
               }
             <br />
             </td>
             <td>
-              { createButtonClicked ? (
-                <Create handleSubmit={this.handleSubmit} />
-              ) : showEditCar ? (
-                <Edit editCar={this.editCar} />
-              ) : (
-                null
-              )}
+              { createButtonClicked
+                ? ( 
+                    <Create handleSubmitCreate={this.handleSubmitCreate} />
+                  )
+                : editButtonClicked 
+                ? (
+                    <Edit handleSubmitEdit={this.handleSubmitEdit} />
+                  )
+                : ( null )
+              }
             </td>
             <td></td>
             <td></td>

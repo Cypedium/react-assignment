@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-export default class Create extends Component {
+export default class Edit extends Component {
       
         initialState = { //clear the form
           brand: '',
@@ -17,7 +17,7 @@ export default class Create extends Component {
     }
 
     submitForm = () => {
-        this.props.handleSubmit(this.state);
+        this.props.handleSubmitEdit(this.state);
         this.setState(this.initialState);
     }
     

@@ -17,7 +17,7 @@ export default class Create extends Component {
     }
 
     submitForm = () => {
-        this.props.handleSubmit(this.state);
+        this.props.handleSubmitCreate(this.state);
         this.setState(this.initialState);
     }
     

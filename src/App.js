@@ -3,12 +3,19 @@ import Details from "./components/Details";
 import Create from "./components/Create";
 import List from "./components/List";
 import Edit from "./components/Edit";
+import NavBar from "./components/navbar";
+import Counters from "./components/counters";
 
 class App extends Component {
   
-  state = {
-      carList: 
-      [
+  state = { 
+      counters: [
+        { id: 1, value: 0 },
+        { id: 2, value: 0 },
+        { id: 3, value: 0 },
+        { id: 4, value: 0 }
+      ],
+      carList: [
           {
               "Id": "1",
               "brand": "Saab",
@@ -48,7 +55,42 @@ class App extends Component {
       
   };
 
+  //-----SHOPPING CART--------------------------------------------------------------------------------------------------------------------------------
+  constructor(props) {
+    super(props);
+    console.log("App - Constructor"); /*need to passing throw props*/
+    // this.state = this.props.api;
+   };
+   
+   componentDidMount() {
+     console.log("App - Mounted");
+     // Ajax Call
+     //this.setState({api})
+   }
+   
+     handleIncrement = counter => {
+       const counters = [...this.state.counters]; /*clone the state*/
+       const index = counters.indexOf(counter);
+       counters[index]={...counter};
+       counters[index].value++;
+       this.setState({ counters });
+   };
+   
+     handleReset = () => {
+       const counters = this.state.counters.map( c => { /*this creates an array*/ 
+         c.value = 0;
+         return c;
+       });
+       this.setState({ counters });
+     };
+   
+     handleDelete = (counterId) => {
+      const counters = this.state.counters.filter(c => c.id !== counterId);
+      this.setState({ counters: counters }) /*override property with constant*/
+     };
+//-----------------------------------------------------------------------------------------------------------------
 
+//------MANAGE CAR-------------------------------------------------------------------------------------------------
   removeCar = Id => {
     const { carList } = this.state;
     this.setState (
@@ -133,11 +175,25 @@ class App extends Component {
             oldColumn: column           
     })
   }
+//----------------------------------------------------------------------------------------------------------------------
 
   render() {
-    const {createButtonClicked, details, editButtonClicked} = this.state;
+    console.log("App - Rendered");
+
+    const {createButtonClicked, details, editButtonClicked, counters} = this.state;
     return (
       <Fragment>
+        <NavBar
+          totalCounters={counters.filter(c => c.value > 0).length} /*only display values greater than zero*/
+        />
+        <main className="container">
+          <Counters
+            counters={counters}
+            onReset={this.handleReset}
+            onIncrement={this.handleIncrement}
+            onDelete={this.handleDelete}
+          />
+        </main>
         <table> {/* Head */}
           <tr>
             <td></td>

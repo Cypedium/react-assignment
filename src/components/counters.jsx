@@ -12,20 +12,17 @@ export default class Counters extends Component {
 
     return (
       <Fragment>
-        <button 
-          onClick={onReset}
-          className="btn btn-primary btn-sm m- 2"
-        >
-          Reset
-        </button>
+        <button onClick={onReset} className="btn btn-primary btn-sm m- 2"> Reset </button>
+        <br />
           {counters.map(counter => (
             <Counter
               key={counter.id}
               onDelete={onDelete} /*is a function*/ /*bubbeling this event  to counter component*/
               onIncrement={onIncrement}
               counter={counter}
-           /> 
-        ))}  
+           />
+           ))  
+          }
       </Fragment>
     );
   }

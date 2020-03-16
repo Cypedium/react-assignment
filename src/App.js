@@ -199,7 +199,7 @@ class App extends Component {
             <td></td>
             <td>
               <h1>Handle Cars</h1>
-              <button onClick={() => this.setState({createButtonClicked: true})}>Create new Car</button>            
+              <button className="btn btn-info" onClick={() => this.setState({createButtonClicked: true})}>Create new Car</button>            
             </td>
             <td></td>
           </tr>

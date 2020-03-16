@@ -7,16 +7,16 @@ export default class List extends Component {
                 return (
                         <tr>
                             <th>
-                                <button onClick={() => props.sortByString("brand")}>Brand</button>
+                                <button className="btn btn-info" onClick={() => props.sortByString("brand")}>Brand</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortByInt("model")}>Model</button>
+                                <button className="btn btn-info" onClick={() => props.sortByInt("model")}>Model</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortByInt("year")}>Year</button>
+                                <button className="btn btn-info" onClick={() => props.sortByInt("year")}>Year</button>
                             </th>
                             <th>
-                                <button onClick={() => props.sortByInt("price")}>Price</button>
+                                <button className="btn btn-info" onClick={() => props.sortByInt("price")}>Price</button>
                             </th> 
                             <th>Options</th>                     
                         </tr>
@@ -33,9 +33,9 @@ export default class List extends Component {
                                 <td>{row.year}</td>
                                 <td>{row.price}</td>
                                 <td>
-                                    <button onClick={() => props.detailCar(row.Id)}>Detail</button>
+                                    <button className="btn btn-primary" onClick={() => props.detailCar(row.Id)}>Detail</button>
                                     {" "}
-                                    <button onClick={() => props.removeCar(row.Id) }>Delete</button>
+                                    <button className="btn btn-danger" onClick={() => props.removeCar(row.Id) }>Delete</button>
                                 </td>                            
                             </tr>                    
                     )

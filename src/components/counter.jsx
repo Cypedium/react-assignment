@@ -39,17 +39,10 @@ componentWillUnmount() {
 }
 
  render() {
-   console.log("Counter  - Rendered");
-
-   //console.log("props", this.props);
- 
-   return ( 
-      <Fragment>
-        <span 
-          className={this.getBadgeClasses()}
-        >
-         1{this.formatCount()}
-        </span>
+    console.log("Counter  - Rendered");
+    return ( 
+      <Fragment> {/*Creating row*/}
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button 
           onClick={() => this.props.onIncrement(this.props.counter)} /*inline arg*/
           className="btn btn-secondary btn-sm"
@@ -61,7 +54,8 @@ componentWillUnmount() {
           className="btn btn-danger btn-sm m-2"
         >
         Delete
-        </button>     
+        </button> 
+        <br /> {/* Preparing new row*/}   
       </Fragment>
     );
   }
@@ -75,7 +69,7 @@ componentWillUnmount() {
 
   formatCount() {
     /* object distructer */
-    const { count } = this.props.counter; /*CHANGED: before this.state but no state exists now*/
-    return count === 0 ? "Zero" : count;
+    const { value } = this.props.counter; /*CHANGED: before this.state but no state exists now*/
+    return value === 0 ? "Zero" : value; /* was count before */
   } 
 }

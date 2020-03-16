@@ -7,16 +7,16 @@ export default class List extends Component {
                 return (
                         <tr>
                             <th>
-                                <button className="btn btn-info" onClick={() => props.sortByString("brand")}>Brand</button>
+                                <button className="btn btn-link" onClick={() => props.sortByString("brand")}>Brand</button>
                             </th>
                             <th>
-                                <button className="btn btn-info" onClick={() => props.sortByInt("model")}>Model</button>
+                                <button className="btn btn-link" onClick={() => props.sortByInt("model")}>Model</button>
                             </th>
                             <th>
-                                <button className="btn btn-info" onClick={() => props.sortByInt("year")}>Year</button>
+                                <button className="btn btn-link" onClick={() => props.sortByInt("year")}>Year</button>
                             </th>
                             <th>
-                                <button className="btn btn-info" onClick={() => props.sortByInt("price")}>Price</button>
+                                <button className="btn btn-link" onClick={() => props.sortByInt("price")}>Price</button>
                             </th> 
                             <th>Options</th>                     
                         </tr>

@@ -27,11 +27,11 @@ export default class Details extends Component {
                                 <td>{row.year}</td>
                                 <td>{row.price}</td>
                                 <td>
-                                    <button onClick={() => props.removeCar(row.Id) }>Delete</button>
+                                    <button className="btn btn-danger" onClick={() => props.removeCar(row.Id) }>Delete</button>
                                 </td>
                                 {" "}
                                 <td>
-                                    <button onClick={() => props.editCar(row)}>Edit</button>
+                                    <button className="btn btn-primary" onClick={() => props.editCar(row)}>Edit</button>
                                 </td>                                                  
                             </tr>                    
                     )

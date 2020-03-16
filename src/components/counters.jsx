@@ -8,7 +8,7 @@ export default class Counters extends Component {
   render() {
     console.log("Counters - Rendered");
 
-    const { counters, onReset, onDelete, onIncrement } = this.props;
+    const { counters, onReset, onDelete, onIncrement, onDecrement } = this.props;
 
     return (
       <Fragment>
@@ -19,6 +19,7 @@ export default class Counters extends Component {
               key={counter.id}
               onDelete={onDelete} /*is a function*/ /*bubbeling this event  to counter component*/
               onIncrement={onIncrement}
+              onDecrement={onDecrement}
               counter={counter}
            />
            ))  

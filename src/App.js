@@ -71,10 +71,21 @@ class App extends Component {
      handleIncrement = counter => {
        const counters = [...this.state.counters]; /*clone the state*/
        const index = counters.indexOf(counter);
-       counters[index]={...counter};
+       counters[index]={...counter};D
        counters[index].value++;
        this.setState({ counters });
    };
+
+   handleDecrement = counter => {
+    const counters = [...this.state.counters]; /*clone the state*/
+    const index = counters.indexOf(counter);
+    counters[index]={...counter};
+    if (counters[index].value > 0)
+    {
+      counters[index].value--;
+      this.setState({ counters });
+    }
+};
    
      handleReset = () => {
        const counters = this.state.counters.map( c => { /*this creates an array*/ 
@@ -121,6 +132,7 @@ class App extends Component {
 
   editCar = car => {
     this.setState({editButtonClicked: true});
+    console.log("car:" + car.brand);
     return (<Edit handleSubmitEdit={() => this.handleSubmitEdit(car)} />)
   }
 
@@ -191,6 +203,7 @@ class App extends Component {
             counters={counters}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
           />
         </main>

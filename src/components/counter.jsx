@@ -47,7 +47,14 @@ componentWillUnmount() {
           onClick={() => this.props.onIncrement(this.props.counter)} /*inline arg*/
           className="btn btn-secondary btn-sm"
         >
-          Increment
+          +
+        </button>
+        {" "}
+        <button 
+          onClick={() => this.props.onDecrement(this.props.counter)} /*inline arg*/
+          className="btn btn-secondary btn-sm"
+        >
+          -
         </button>
         <button
           onClick={() => this.props.onDelete(this.props.counter.id)} 
@@ -63,13 +70,13 @@ componentWillUnmount() {
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-"; /*let=changable const*/ 
-    classes += this.props.counter.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value <= 0 ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
     /* object distructer */
     const { value } = this.props.counter; /*CHANGED: before this.state but no state exists now*/
-    return value === 0 ? "Zero" : value; /* was count before */
+    return value <= 0 ? "Zero" : value; /* was count before */
   } 
 }

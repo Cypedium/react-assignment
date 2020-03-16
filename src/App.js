@@ -71,7 +71,7 @@ class App extends Component {
      handleIncrement = counter => {
        const counters = [...this.state.counters]; /*clone the state*/
        const index = counters.indexOf(counter);
-       counters[index]={...counter};D
+       counters[index]={...counter};
        counters[index].value++;
        this.setState({ counters });
    };

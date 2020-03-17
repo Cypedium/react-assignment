@@ -1,16 +1,26 @@
 import React, { Component, Fragment } from 'react';
 
 export default class Edit extends Component {
-      
-        initialState = { //clear the form
-          brand: '',
-          model: '',
-          year: '',
-          price: ''
-        }
     
-        state = this.initialState
-      
+    
+
+    initialState = () => { 
+        const {aCar} = this.props;
+        this.setState({
+            brand: aCar.brand, 
+            model: aCar.model,
+            year:  aCar.year,
+            price: aCar.price
+            }
+        );
+    }
+
+    state = this.initialState;
+   
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     handleChange = event => {
         const { name, value } = event.target;
         this.setState( { [name]: value } );
@@ -18,15 +28,12 @@ export default class Edit extends Component {
 
     submitForm = () => {
         this.props.handleSubmitEdit(this.state);
-        console.log("asdf" + this.props);
         this.setState(this.initialState);
     }
     
     render() {
         const {brand, model, year, price} = this.state;
         const {handleChange, submitForm} = this;
-        
-        
         
             return (
                     <Fragment>
@@ -44,7 +51,7 @@ export default class Edit extends Component {
                             <label for="">Price</label>
                             <input type="text" name="price" id="price" value={price} onChange={handleChange} />
                             <br />
-                            <input className="btn btn-primary" type="button" value="Submit" onClick={submitForm} />                           
+                            <input className="btn btn-primary" type="button" value="Submit" onClick={submitForm} />                          
                         </form>
                     </Fragment>         
             );

@@ -130,10 +130,10 @@ class App extends Component {
     this.setState({showEditCar: false})
   } */
 
-  editCar = car => {
+  editCar = aCar => {
     this.setState({editButtonClicked: true});
-    console.log("car:" + car.brand);
-    return (<Edit handleSubmitEdit={() => this.handleSubmitEdit(car)} />)
+    
+    return (<Edit handleSubmitEdit={() => this.handleSubmitEdit(aCar)} />)
   }
 
 

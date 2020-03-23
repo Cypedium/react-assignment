@@ -31,7 +31,7 @@ export default class Details extends Component {
                                 </td>
                                 {" "}
                                 <td>
-                                    <button className="btn btn-primary" onClick={() => props.editCar(row)}>Edit</button>
+                                    <button className="btn btn-primary" onClick={() => props.editCar(row.Id)}>Edit</button>
                                 </td>                                                  
                             </tr>                    
                     )

@@ -21,35 +21,40 @@ class App extends Component {
               "brand": "Saab",
               "model": "9-5 Turbo",
               "year": "2005",
-              "price": "5000 SEK"
+              "price": "5000 SEK",
+              "addedToCart" : "0"
           },
           {
               "Id": "2",
               "brand": "Volvo",
               "model": "760",
               "year": "1994",
-              "price": "3000 SEK"
+              "price": "3000 SEK",
+              "addedToCart" : "0"
           },
           {
               "Id": "3",
               "brand": "BMW",
               "model": "525i",
               "year": "2001",
-              "price": "11000 SEK"
+              "price": "11000 SEK",
+              "addedToCart" : "0"
           },
           {
               "Id": "4",
               "brand": "Nissan",
               "model": "300",
               "year": "2012",
-              "price": "185000 SEK"
+              "price": "185000 SEK",
+              "addedToCart" : "0"
           },
           {
               "Id": "5",
               "brand": "Tesla",
               "model": "1000",
               "year": "2019",
-              "price": "1995000 SEK"
+              "price": "1995000 SEK",
+              "addedToCart" : "0"
           }
       ], createButtonClicked: false, editButtonClicked: false, details: true, showEditCar: false, toggleSort: true, oldColumn: ""
       
@@ -110,6 +115,15 @@ class App extends Component {
       });
   }
 
+  addCarToCart = Id => {
+    const { carList } = this.state;
+    this.setState (
+      {
+        carList: carList.update(carList, {1: {addedToCart: {$set: 1}}})
+      }
+    )
+  }
+
   detailCar = Id => {
     
     const { carList } = this.state;
@@ -130,10 +144,12 @@ class App extends Component {
     this.setState({showEditCar: false})
   } */
 
-  editCar = aCar => {
-    this.setState({editButtonClicked: true});
-    
-    return (<Edit handleSubmitEdit={() => this.handleSubmitEdit(aCar)} />)
+  editCar = Id => {
+    const { carList } = this.state;
+    this.setState(
+      { editButtonClicked: true,
+        carListEdit: carList.filter((aCar) => {return aCar.Id === Id} )
+      });
   }
 
 
@@ -222,8 +238,12 @@ class App extends Component {
               { details ? (
                 <Fragment>
                   <h2>List of Cars</h2>
-                  <List 
-                  carList={this.state.carList} detailCar={this.detailCar} removeCar={this.removeCar} sortByInt={this.sortByInt} sortByString={this.sortByString} />
+                  <List carList={this.state.carList}
+                        detailCar={this.detailCar}
+                        removeCar={this.removeCar}
+                        sortByInt={this.sortByInt}
+                        sortByString={this.sortByString}
+                        addCarToCart={this.addCarToCart} />
                 </Fragment>
                 ) : (
                 <Fragment>
@@ -234,7 +254,7 @@ class App extends Component {
                   <Details 
                     carListView={this.state.carListView}
                     removeCar={this.removeCar}
-                    editCar={this.editCar} />
+                    editCar={this.editCar}  />
                 </Fragment>
                 )
               }
@@ -247,7 +267,10 @@ class App extends Component {
                   )
                 : editButtonClicked 
                 ? (
-                    <Edit handleSubmitEdit={this.handleSubmitEdit} />
+                    <Edit 
+                      carListEdit={this.state.carListEdit} 
+                      handleSubmitEdit={this.handleSubmitEdit}
+                    />
                   )
                 : ( null )
               }

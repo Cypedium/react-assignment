@@ -1,24 +1,29 @@
 import React, { Component, Fragment } from 'react';
 
 export default class Edit extends Component {
-    
-    
-
-    initialState = () => { 
-        const {aCar} = this.props;
-        this.setState({
-            brand: aCar.brand, 
-            model: aCar.model,
-            year:  aCar.year,
-            price: aCar.price
-            }
-        );
+    state = {
+        brand:  "",
+        model:  "",
+        year:   "",
+        price:  ""
     }
 
+
+    initialState = () => {
+        const {carListEdit} = this.props;
+        this.setState(
+        {
+            brand: carListEdit[0].brand, 
+            model: carListEdit[0].model,
+            year:  carListEdit[0].year,
+            price: carListEdit[0].price
+        });
+    }
+    
     state = this.initialState;
    
-    componentDidMount() {
-        console.log(this.props);
+    componentDidMount = () => {
+        console.log(this.props.carListEdit[0].brand);
     }
 
     handleChange = event => {

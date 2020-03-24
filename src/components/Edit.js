@@ -1,30 +1,24 @@
 import React, { Component, Fragment } from 'react';
 
 export default class Edit extends Component {
-    state = {
-        brand:  "",
-        model:  "",
-        year:   "",
-        price:  ""
-    }
-
-
-    initialState = () => {
-        const {carListEdit} = this.props;
-        this.setState(
-        {
-            brand: carListEdit[0].brand, 
-            model: carListEdit[0].model,
-            year:  carListEdit[0].year,
-            price: carListEdit[0].price
-        });
-    }
     
     state = this.initialState;
-   
-    componentDidMount = () => {
-        console.log(this.props.carListEdit[0].brand);
+
+    initialState = {
+        brand: '',
+        model: '',
+        year: '',
+        price: ''
     }
+    
+    getStateFromCar = () => {
+        const { carListEdit } = this.props;
+                this.setState( { brand: carListEdit[0].brand } );
+                this.setState( { model: carListEdit[0].model } );
+                this.setState( { year:  carListEdit[0].year  } );
+                this.setState( { price: carListEdit[0].price } );
+    }
+    
 
     handleChange = event => {
         const { name, value } = event.target;
@@ -35,11 +29,18 @@ export default class Edit extends Component {
         this.props.handleSubmitEdit(this.state);
         this.setState(this.initialState);
     }
-    
+
+    /* Use this function to debug my code */
+
+    componentDidMount = () => {
+    }
+
+
     render() {
+        this.getStateFromCar();
         const {brand, model, year, price} = this.state;
         const {handleChange, submitForm} = this;
-        
+           
             return (
                     <Fragment>
                         <h2>Edit Car</h2>              

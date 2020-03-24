@@ -1,24 +1,14 @@
 import React, { Component, Fragment } from 'react';
 
 export default class Edit extends Component {
+    initialState = {
+        brand: this.props.carListEdit[0].brand,
+        model: this.props.carListEdit[0].model,
+        year: this.props.carListEdit[0].year,
+        price: this.props.carListEdit[0].price
+    }
     
     state = this.initialState;
-
-    initialState = {
-        brand: '',
-        model: '',
-        year: '',
-        price: ''
-    }
-    
-    getStateFromCar = () => {
-        const { carListEdit } = this.props;
-                this.setState( { brand: carListEdit[0].brand } );
-                this.setState( { model: carListEdit[0].model } );
-                this.setState( { year:  carListEdit[0].year  } );
-                this.setState( { price: carListEdit[0].price } );
-    }
-    
 
     handleChange = event => {
         const { name, value } = event.target;
@@ -37,7 +27,6 @@ export default class Edit extends Component {
 
 
     render() {
-        this.getStateFromCar();
         const {brand, model, year, price} = this.state;
         const {handleChange, submitForm} = this;
            

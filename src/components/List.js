@@ -30,16 +30,17 @@ export default class List extends Component {
                     return (                    
                             <tr key={"carId" + row.Id}>
 
-                                <td>{row.brand}</td>
+                                <td className="">{row.brand}</td>
                                 <td>{row.model}</td>
                                 <td>{row.year}</td>
                                 <td>{row.price}</td>
                                 <td>
-                                    <button className="btn btn-success" onClick={() => props.addCarToCart(row.Id) }>AddToCart</button>
-                                    {" "}
                                     <button className="btn btn-primary" onClick={() => props.detailCar(row.Id)}>Detail</button>
                                     {" "}
                                     <button className="btn btn-danger" onClick={() => props.removeCar(row.Id) }>Delete</button>
+                                    {" "}
+                                    <button className="btn btn-success" onClick={() => props.addCarToCart(row.Id) }>AddToCart</button>
+                                    
                                 </td>                            
                             </tr>                    
                     )

@@ -104,9 +104,9 @@ class App extends Component {
       const counters = this.state.counters.filter(c => c.id !== counterId);
       this.setState({ counters: counters }) /*override property with constant*/
      };
-//-----------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------
 
-//------MANAGE CAR-------------------------------------------------------------------------------------------------
+  //------MANAGE CAR-------------------------------------------------------------------------------------------------
   removeCar = Id => {
     const { carList } = this.state;
     this.setState (
@@ -115,14 +115,11 @@ class App extends Component {
       });
   }
 
+  //---PREPARED FUNCTION FOR PROJECT WEBSHOP------------------------------------------------------------------------
   addCarToCart = Id => {
     const { carList } = this.state;
-    this.setState (
-      {
-        carList: carList.update(carList, {1: {addedToCart: {$set: 1}}})
-      }
-    )
   }
+  //-----------------------------------------------------------------------------------------------------------------
 
   detailCar = Id => {
     
